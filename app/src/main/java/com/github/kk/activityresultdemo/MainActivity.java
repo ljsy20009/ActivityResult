@@ -2,20 +2,12 @@ package com.github.kk.activityresultdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.github.kk.activityresult.ActivityResult;
-import com.github.kk.activityresult.ActivityResultCallback;
-import com.github.kk.activityresult.ActivityResultInfo;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,58 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.txt);
 
-        findViewById(R.id.rxjava).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.goFirst).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                ActivityResult.in(MainActivity.this)
-                        .startResult(SecondActivity.class)
-                        .subscribe(new Observer<ActivityResultInfo>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                            }
-
-                            @Override
-                            public void onNext(ActivityResultInfo activityResultInfo) {
-                                Intent intent = activityResultInfo.getData();
-                                int resultCode = activityResultInfo.getResultCode();
-                                if (resultCode == RESULT_OK) {
-                                    String data = intent.getStringExtra("data");
-                                    tv.setText("rxjava-》" + data);
-
-                                    Snackbar.make(view, "返回数据->" + data, Snackbar.LENGTH_LONG)
-                                            .setAction("Action", null).show();
-                                }
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                            }
-
-                            @Override
-                            public void onComplete() {
-                            }
-                        });
-            }
-        });
-
-        findViewById(R.id.callback).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                ActivityResult.in(MainActivity.this)
-                        .startResult(SecondActivity.class, new ActivityResultCallback() {
-                            @Override
-                            public void onResult(ActivityResultInfo activityResultInfo) {
-                                Intent intent = activityResultInfo.getData();
-                                int resultCode = activityResultInfo.getResultCode();
-                                if (resultCode == RESULT_OK) {
-                                    String data = intent.getStringExtra("data");
-                                    tv.setText("callback-》" + data);
-
-                                    Snackbar.make(view, "返回数据->" + data, Snackbar.LENGTH_LONG)
-                                            .setAction("Action", null).show();
-                                }
-                            }
-                        });
+                startActivity(new Intent(MainActivity.this, FirstActivity.class));
             }
         });
     }

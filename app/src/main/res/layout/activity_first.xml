@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".FirstActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,12 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:id="@+id/goFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="进入first页面"
-        android:layout_marginTop="50dp"/>
+    <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
